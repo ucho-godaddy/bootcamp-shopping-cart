@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from '../components/head';
 import Link from 'next/link';
+import Cart from '../components/Cart'
 
 import { Container, Typography } from '@mui/material'
 
@@ -13,6 +14,7 @@ export const CartPage = () => (
     <div>
       <Link href="/shop">View shop</Link>
     </div>
+    <Cart />
   </Container>
 );
 
