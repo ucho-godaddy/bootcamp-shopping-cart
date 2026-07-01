@@ -8,6 +8,7 @@ function ShoppingItemList() {
   // this is the state we will use to hold the response from the api
   const [products, setProducts] = useState([]);
   const router = useRouter();
+  const addToCartUrl = "http://localhost:8000/v1/cartitems";
 
   useEffect( () => {
     /* fetch list of products here */
@@ -20,6 +21,9 @@ function ShoppingItemList() {
   const handleAddToCart = async (product) => {
     /* add product to cart via api */
     /* redirect to the cart page */
+    const body = JSON.stringify(product);
+    const response = await fetch(addToCartUrl, { method: 'POST', body, headers: { 'content-type': 'application/json' }});
+    router.push("/cart")
   }
 
   return (

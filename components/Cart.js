@@ -14,20 +14,23 @@ function Cart(props) {
         .then(data => setCartItems(data))
   }, [])
 
-    // function deleteItem(id) {
-    //     fetch(`http://localhost:8000/v1/cartitems/{$id}`, {method: 'DELETE'})
-    //         .then(res => {
-    //             if (res.ok) {
-    //                 const newItems = cartItems.filter(i => i.id != id);
-    //                 this.setState({
-    //                     cartItems: newItems
-    //                 })
-    //             }
-    //             else {
-    //                 alert(`Failed to delete ${id}: ${res.status}`)
-    //             }
-    //         });
-    //     }
+    const handleDeleteFromCart = async (id) => {
+        const body = JSON.stringify({ id });
+
+        const response = await fetch(`http://localhost:8000/v1/cartitems/${id}`, {
+            method: "DELETE",
+            body,
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (response.ok) {
+            setCartItems(cartItems.filter((item) => item.id !== id));
+        } else {
+            alert(`Failed to delete ${id}: ${response.status}`);
+        }
+    };
 
     const totalPrice = cartItems.map(item => item.quantity * item.price)
         .reduce((a, b) => a + b, 0)
@@ -43,7 +46,7 @@ function Cart(props) {
                         id={item.id}
                         price={item.price}
                         quantity={item.quantity}
-                        // onRemoveFromCart={this.deleteItem}
+                        onRemoveFromCart={handleDeleteFromCart}
                         />
                     </Grid>
                 )}

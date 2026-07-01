@@ -28,7 +28,7 @@ function ShopItem({product_id, name, description, image_url, price, is_on_sale, 
 
     </CardContent>
       <CardActions>
-        <Button size="small">Add To Cart</Button>
+        <Button onClick={addToCart} size="small">Add To Cart</Button>
       </CardActions>
     </Card>
   );
