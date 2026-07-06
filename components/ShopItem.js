@@ -7,6 +7,10 @@ const images=[
     ""
 ]
 
+export function getProductImage(product_id) {
+    return images[product_id];
+}
+
 function ShopItem({product_id, name, description, image_url, price, is_on_sale, sale_price, onAddToCart}) {
 
   const addToCart = () => {
@@ -19,10 +23,10 @@ function ShopItem({product_id, name, description, image_url, price, is_on_sale, 
         component="img"
         alt="shop item image"
         height="140"
-        image={images[product_id]}
+        image={getProductImage(product_id)}
       />
     <CardContent>
-        <Typography variant="h4">{name}</Typography>   
+        <Typography variant="h4">{name}</Typography>
         <Typography variant="subtitle2">{description}</Typography>
         <Typography variant="h5">${is_on_sale ? sale_price: price}</Typography>
 
